@@ -1,0 +1,39 @@
+name: Build
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+
+concurrency:
+    group: build-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    test_and_apk:
+        name: "Build Help"
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            pull-requests: write
+
+        timeout-minutes: 60
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Set up JDK 19
+              uses: actions/setup-java@v4
+              with:
+                  distribution: 'zulu'
+                  java-version: 19
+
+            - name: Build
+              run: |
+                  ./gradlew :help --configuration-cache
+                  ./gradlew :help --configuration-cache
+              env:
+                  GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}
+
