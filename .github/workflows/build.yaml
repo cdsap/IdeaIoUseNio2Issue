@@ -3,7 +3,7 @@ name: Build
 on:
     push:
         branches:
-            - main
+            - test_1
     pull_request:
 
 concurrency:
@@ -32,8 +32,8 @@ jobs:
 
             - name: Build
               run: |
-                  ./gradlew :help --configuration-cache
-                  ./gradlew :help --configuration-cache
+                  ./gradlew assembleDebug
+
               env:
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}
 
