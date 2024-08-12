@@ -41,6 +41,7 @@ android {
 dependencies {
     implementation(project(":mylibrary"))
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    coreLibraryDesugaring("joda-time:joda-time:2.10.5")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
